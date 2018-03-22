@@ -4,13 +4,14 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Drupal Core Auto-Update Architecture</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+		<link rel="stylesheet" href="css/theme/simple.css">
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link rel="stylesheet" href="css/autoupdate-drupal.css">
 
 		<!-- Printing and PDF exports -->
 		<script>
@@ -23,10 +24,79 @@
 	</head>
 	<body>
 		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
+		
+		<div class="slides">
+				<section data-background="images/backgrounds/Nashville-opener.png">
+
+				</section>
+			<section data-background="images/backgrounds/Nashville.png">
+				  <h2>Drupal Core Auto-Update Architecture</h2>
+				  <h3><em>Peter Wolanin</em></h3>
+				  <h3><em>David Strauss</em></h3>
+				</section>
+        <section data-background="images/backgrounds/16968083219_34589346e4_o.jpg">
+          <div class="about-me">
+          <h2>Peter Wolanin</h2>
+            <h6>BioRAFT Engineering & Drupal Security Teams</h6>
+            <h2>pwolanin</h2>
+            <p class="photo-credit">
+              Photo by <a href="https://www.flickr.com/photos/amazeelabs/16968083219/in/set-72157651561042300">amazeelabs</a>, <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">by-nc-sa</a>
+            </p>
+            </div>
+        </section>
+        <section data-background="images/backgrounds/36703677943_cfdc0aa59e_k.jpg">
+          <div class="about-me">
+          <h2>David Strauss</h2>
+            <h6>Pantheon CTO / Co-Founder & Drupal Security Team</h6>
+            <h2>davidstrauss</h2>
+            <p class="photo-credit">
+              Photo by <a href="https://www.flickr.com/photos/73490109@N02/36703677943/in/pool-drupalconvienna2017/">Dominik Kiss</a>, <a href="https://creativecommons.org/licenses/by-nc/2.0/">by-nc</a>
+            </p>
+            </div>
+        </section>
+				<section>
+				  <h2>Background</h2>
+				</section>
+				<section>
+				  <h2>Insecure approaches</h2>
+				</section>
+				<section>
+				  <h2>Airship’s Auto-Update Framework</h2>
+    <ul>
+    <li>Pros</li>
+      <ul>
+      <li>Someone else built it.</li>
+      </ul>
+    <li>Cons</li>
+      <ul>
+      <li>In place update prevents multi headed configs</li>
+      <li>Requires PHP 7.2+</li>
+      <li>Their update system while maybe secure has a lot of marketing cruft and seems very built around their product and is not componentized or broken apart into a separate project. </li>
+      <li>Seems to go for perfect and not realistic.</li>
+      </ul>
+    </ul>
+				  </section>
+				<section>
+				  <h2>Option: Monolithic PHAR Distribution</h2>
+				</section>
+				<section>
+				  <h2>Option: Modular PHAR Distribution</h2>
+				</section>
+				<section>
+				  <h2>Option: Composer-style File Layout</h2>
+				</section>	
+				<section>
+				  <h2>Option: Other user accounts updates</h2>
+				</section>
+				<section>
+				  <h2>Consideration: Dependency Resolution</h2>
+				</section>
+			<section data-background="images/backgrounds/Nashville.png">
+				  <h2>What did you think?</h2>
+				  <h3>Locate this session at the DrupalCon Nashville website:</h3>
+				  <h3>Take the Survey!</h3>
+				</section>
+				</div>
 		</div>
 
 		<script src="lib/js/head.min.js"></script>
