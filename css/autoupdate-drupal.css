@@ -50,8 +50,8 @@ section .small {
 
 .about-me {
   position: absolute;
-  top: -4em;
-  right: 15em;
+  top: -1em;
+  right: 17em;
   text-align: right;
   color: #fff;
 }

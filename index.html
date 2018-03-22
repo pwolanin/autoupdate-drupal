@@ -57,7 +57,9 @@
 				<section>
 				  <h2>Background</h2>
 				  <ul>
-				  <li><a href="https://theupdateframework.github.io/">The Update Framework (TUF)</a></li></ul>
+				  <li><a href="https://theupdateframework.github.io/">The Update Framework (TUF)</a></li>
+				  <li><a href="https://paragonie.com/blog/2016/10/guide-automatic-security-updates-for-php-developers#why-automatic-updates">Paragon's Guide to Automatic Security Updates</a></li>
+				  </ul>
 				</section>
 				<section>
 				  <h2>Is there a Use Case?</h2>
@@ -65,12 +67,19 @@
             <li>Applicable only to sites with no QA process?</li>
             <li>Core only or contrib too?</li>
             <li>Taking all updates?</li>
+            <li>Handle multiple web heads or only single?</li>
+            <li>Stricter BC requirements for contrib (and core)?</li>
             </ul>
 				  </section>
 				  <section>
 				  <h2>Insecure approaches</h2>
 				    <ul>
-            <li>WordPress</li>
+            <li>WordPress-style
+            <ul>
+            <li>Does not perform any digital signature verification</li>
+            <li>Webserver overwrites PHP files</li>
+            </ul>
+            </li>
             <li></li>
             <li></li>
             </ul>
@@ -92,6 +101,14 @@
           </ul>
 				  </section>
 				<section>
+				  <h2>Code as cache?</h2>
+          <ul>
+          <li>An entry point for web requests</li>
+          <li>An auto-update subsystem<li>
+          <li>Most site code is a validated/signed/protected cache (e.g. phar)</li>
+          </ul>
+        </section>
+        <section>
 				  <h2>Option: Monolithic PHAR Distribution</h2>
 				  <ul>
           <li>One PHAR for the entire site deployment</li>
@@ -112,7 +129,7 @@
           </li>
           </ul>
 
-				  </section>
+        </section>
 				<section>
 				  <h2>Option: Modular PHAR Distribution</h2>
 				</section>
@@ -124,6 +141,15 @@
 				</section>
 				<section>
 				  <h2>Consideration: Dependency Resolution</h2>
+				</section>
+				<section>
+				  <h2>Discuss!</h2>
+				  <ul>
+				  <li>Is there a compelling use case?</li>
+				  <li>Do we have the resources to develop and maintain new infra?</li>
+				  <li>Do we have resources and expertise to substantially rework the code layout?</li>
+				  <li>Drupal 9 or 10?</li>
+				  </ul>
 				</section>
 			<section data-background="images/backgrounds/Nashville.png">
 				  <h3>What did you think?</h3>
