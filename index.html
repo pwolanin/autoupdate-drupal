@@ -56,6 +56,8 @@
         </section>
 				<section>
 				  <h2>Background</h2>
+				  <ul>
+				  <li><a href="https://theupdateframework.github.io/">The Update Framework (TUF)</a></li></ul>
 				</section>
 				<section>
 				  <h2>Is there a Use Case?</h2>
@@ -74,24 +76,43 @@
             </ul>
 				</section>
 				<section>
-				  <h2>Airship’s Auto-Update Framework</h2>
-    <ul>
-    <li>Pros</li>
-      <ul>
-      <li>Someone else built it.</li>
-      </ul>
-    <li>Cons</li>
-      <ul>
-      <li>In place update prevents multi headed configs</li>
-      <li>Requires PHP 7.2+</li>
-      <li>Their update system while maybe secure has a lot of marketing cruft and seems very built around their product and is not componentized or broken apart into a separate project. </li>
-      <li>Seems to go for perfect and not realistic.</li>
-      </ul>
-    </ul>
+				  <h2>Option: Airship’s Auto-Update Framework</h2>
+          <ul>
+          <li>Pros
+            <ul>
+            <li>Someone else built it.</li>
+            </ul></li>
+          <li>Cons
+            <ul>
+            <li>In place update prevents multi headed configs</li>
+            <li>Requires PHP 7.2+</li>
+            <li>Their update system while maybe secure has a lot of marketing cruft and seems very built around their product and is not componentized or broken apart into a separate project. </li>
+            <li>Seems to go for perfect and not realistic.</li>
+            </ul></li>
+          </ul>
 				  </section>
 				<section>
 				  <h2>Option: Monolithic PHAR Distribution</h2>
-				</section>
+				  <ul>
+          <li>One PHAR for the entire site deployment</li>
+          <li>Built on Drupal.org servers (or affiliated infrastructure)</li>
+          <li>Minimizes complexity of the web server infrastructure</li>
+          <li>Pros
+            <ul>
+            <li>Simplicity</li>
+            <li>Could just be packages of full Composer runs</li>
+            </ul>
+          </li>
+          <li>Cons
+            <ul>
+            <li>Heavy d.o infrastructure requirements</li>
+            <li>MIght/would have to package all modules/themes/etc</li>
+            <li>Might not allow for any patches to code (why?)</li>
+            </ul>
+          </li>
+          </ul>
+
+				  </section>
 				<section>
 				  <h2>Option: Modular PHAR Distribution</h2>
 				</section>
@@ -105,7 +126,7 @@
 				  <h2>Consideration: Dependency Resolution</h2>
 				</section>
 			<section data-background="images/backgrounds/Nashville.png">
-				  <h2>What did you think?</h2>
+				  <h3>What did you think?</h3>
 				  <h3>Locate this session at the DrupalCon Nashville website:</h3>
 				  <p><a href="https://events.drupal.org/node/21010">https://events.drupal.org/node/21010</a></p>
 				  <h3>Take the Survey!</h3>
