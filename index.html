@@ -1,39 +1,39 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>Drupal Core Auto-Update Architecture</title>
+    <title>Drupal Core Auto-Update Architecture</title>
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/simple.css">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/simple.css">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
-		<link rel="stylesheet" href="css/autoupdate-drupal.css">
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <link rel="stylesheet" href="css/autoupdate-drupal.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-		
-		<div class="slides">
-				<section data-background="images/backgrounds/Nashville-opener.png">
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
 
-				</section>
-			<section data-background="images/backgrounds/Nashville.png">
-				  <h2>Drupal Core Auto-Update Architecture</h2>
-				  <h3><em>Peter Wolanin</em></h3>
-				  <h3><em>David Strauss</em></h3>
-				</section>
+    <div class="slides">
+        <section data-background="images/backgrounds/Nashville-opener.png">
+
+        </section>
+      <section data-background="images/backgrounds/Nashville.png">
+          <h2>Drupal Core Auto-Update Architecture</h2>
+          <h3><em>Peter Wolanin</em></h3>
+          <h3><em>David Strauss</em></h3>
+        </section>
         <section data-background="images/backgrounds/16968083219_34589346e4_o.jpg">
           <div class="about-me">
           <h2>Peter Wolanin</h2>
@@ -54,15 +54,15 @@
             </p>
             </div>
         </section>
-				<section>
-				  <h2>Background</h2>
-				  <ul>
-				  <li><a href="https://theupdateframework.github.io/">The Update Framework (TUF)</a></li>
-				  <li><a href="https://paragonie.com/blog/2016/10/guide-automatic-security-updates-for-php-developers#why-automatic-updates">Paragon's Guide to Automatic Security Updates</a></li>
-				  </ul>
-				</section>
-				<section>
-				  <h2>Is there a Use Case?</h2>
+        <section>
+          <h2>Background</h2>
+          <ul>
+          <li><a href="https://theupdateframework.github.io/">The Update Framework (TUF)</a></li>
+          <li><a href="https://paragonie.com/blog/2016/10/guide-automatic-security-updates-for-php-developers#why-automatic-updates">Paragon's Guide to Automatic Security Updates</a></li>
+          </ul>
+        </section>
+        <section>
+          <h2>Is there a Use Case?</h2>
             <ul>
             <li>Applicable only to sites with no QA process?</li>
             <li>Core only or contrib too?</li>
@@ -70,10 +70,10 @@
             <li>Handle multiple web heads or only single?</li>
             <li>Stricter BC requirements for contrib (and core)?</li>
             </ul>
-				  </section>
-				  <section>
-				  <h2>Insecure approaches</h2>
-				    <ul>
+          </section>
+          <section>
+          <h2>Insecure approaches</h2>
+            <ul>
             <li>WordPress-style
             <ul>
             <li>Does not perform any digital signature verification</li>
@@ -83,9 +83,9 @@
             <li></li>
             <li></li>
             </ul>
-				</section>
-				<section>
-				  <h2>Option: Airship’s Auto-Update Framework</h2>
+        </section>
+        <section>
+          <h2>Option: Airship’s Auto-Update Framework</h2>
           <ul>
           <li>Pros
             <ul>
@@ -99,9 +99,9 @@
             <li>Seems to go for perfect and not realistic.</li>
             </ul></li>
           </ul>
-				  </section>
-				<section>
-				  <h2>Code as cache?</h2>
+          </section>
+        <section>
+          <h2>Code as cache?</h2>
           <ul>
           <li>An entry point for web requests</li>
           <li>An auto-update subsystem<li>
@@ -109,8 +109,8 @@
           </ul>
         </section>
         <section>
-				  <h2>Option: Monolithic PHAR Distribution</h2>
-				  <ul>
+          <h2>Option: Monolithic PHAR Distribution</h2>
+          <ul>
           <li>One PHAR for the entire site deployment</li>
           <li>Built on Drupal.org servers (or affiliated infrastructure)</li>
           <li>Minimizes complexity of the web server infrastructure</li>
@@ -130,52 +130,52 @@
           </ul>
 
         </section>
-				<section>
-				  <h2>Option: Modular PHAR Distribution</h2>
-				</section>
-				<section>
-				  <h2>Option: Composer-style File Layout</h2>
-				</section>	
-				<section>
-				  <h2>Option: Other user accounts updates</h2>
-				</section>
-				<section>
-				  <h2>Consideration: Dependency Resolution</h2>
-				</section>
-				<section>
-				  <h2>Discuss!</h2>
-				  <ul>
-				  <li>Is there a compelling use case?</li>
-				  <li>Do we have the resources to develop and maintain new infra?</li>
-				  <li>Do we have resources and expertise to substantially rework the code layout?</li>
-				  <li>Drupal 9 or 10?</li>
-				  </ul>
-				</section>
-			<section data-background="images/backgrounds/Nashville.png">
-				  <h3>What did you think?</h3>
-				  <h3>Locate this session at the DrupalCon Nashville website:</h3>
-				  <p><a href="https://events.drupal.org/node/21010">https://events.drupal.org/node/21010</a></p>
-				  <h3>Take the Survey!</h3>
-				  <p><a href="https://www.surveymonkey.com/r/DrupalConNashville">https://www.surveymonkey.com/r/DrupalConNashville</a></p>
-				</section>
-				</div>
-		</div>
+        <section>
+          <h2>Option: Modular PHAR Distribution</h2>
+        </section>
+        <section>
+          <h2>Option: Composer-style File Layout</h2>
+        </section>
+        <section>
+          <h2>Option: Other user accounts updates</h2>
+        </section>
+        <section>
+          <h2>Consideration: Dependency Resolution</h2>
+        </section>
+        <section>
+          <h2>Discuss!</h2>
+          <ul>
+          <li>Is there a compelling use case?</li>
+          <li>Do we have the resources to develop and maintain new infra?</li>
+          <li>Do we have resources and expertise to substantially rework the code layout?</li>
+          <li>Drupal 9 or 10?</li>
+          </ul>
+        </section>
+      <section data-background="images/backgrounds/Nashville.png">
+          <h3>What did you think?</h3>
+          <h3>Locate this session at the DrupalCon Nashville website:</h3>
+          <p><a href="https://events.drupal.org/node/21010">https://events.drupal.org/node/21010</a></p>
+          <h3>Take the Survey!</h3>
+          <p><a href="https://www.surveymonkey.com/r/DrupalConNashville">https://www.surveymonkey.com/r/DrupalConNashville</a></p>
+        </section>
+        </div>
+    </div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
 
-		<script>
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+    <script>
+      // More info about config & dependencies:
+      // - https://github.com/hakimel/reveal.js#configuration
+      // - https://github.com/hakimel/reveal.js#dependencies
+      Reveal.initialize({
+        dependencies: [
+        { src: 'plugin/markdown/marked.js' },
+        { src: 'plugin/markdown/markdown.js' },
+        { src: 'plugin/notes/notes.js', async: true },
+        { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+      });
+    </script>
+  </body>
 </html>
