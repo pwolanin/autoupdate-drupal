@@ -85,6 +85,16 @@
             </ul>
         </section>
         <section>
+          <h2>Drupal.org infrastructure requirements</h2>
+            <p>Some of these services are already under consideration and would help facilitate automatic updates by core or via scripting</p>
+            <ul>
+            <li>A composer UI?</li>
+            <li>A way to save one or more composer.json files associated with my drupal.org account<li>
+            <li>Generating a composer.lock for site or a given composer.json</li>
+            <li>Re-generating lock files when then are updates (or only security updates?)</li>
+            </ul>
+          </section>
+        <section>
           <h2>Option: Airship’s Auto-Update Framework</h2>
           <ul>
           <li>Pros
@@ -102,6 +112,7 @@
           </section>
         <section>
           <h2>Code as cache?</h2>
+          <p>Are we thinking about the problem wrong? We have a protected mechanism for writing PHP cache files for Twig - if that's secure enough can we use it for everything?</p>
           <ul>
           <li>An entry point for web requests</li>
           <li>An auto-update subsystem<li>
@@ -132,12 +143,39 @@
         </section>
         <section>
           <h2>Option: Modular PHAR Distribution</h2>
+          <ul>
+          <li>One or more PHAR files for core</li>
+          <li>One PHAR for each module</li>
+          <li>Probably decomposed dependencies (one PHAR for each unique dependency)</li>
+          <li>Pros
+            <ul>
+            <li>CDN catchability and mirror support</li>
+            <li>Lower bandwidth requirements than a massive file</li>
+            </ul>
+          </li>
+          <li>Cons
+            <ul>
+            <li>No direct support for decomposing Composer dependencies into PHAR files</li>
+            <li>Harder than monolithic phar to support patches (makes them uncachable)</li>
+            </ul>
+          </li>
+          </ul>
         </section>
         <section>
           <h2>Option: Composer-style File Layout</h2>
+          <ul>
+          <li>Suitable only for sites built with composer</li>
+          <li>Possibly hard to manage multiple web heads without downtime</li>
+          </ul>
         </section>
         <section>
-          <h2>Option: Other user accounts updates</h2>
+          <h2>Option: Other user accounts updates core</h2>
+          <ul>
+          <li>More difficult since drush stopped supporintg upc command</li>
+          <li>Requires some kind of process to build the new codebase an move it into place</li>
+          <li>Requires composer at least to download dependencies</li>
+          <li>Otherwise, suitable for sites with only core and custom modules?</li>
+          </ul>
         </section>
         <section>
           <h2>Consideration: Dependency Resolution</h2>
