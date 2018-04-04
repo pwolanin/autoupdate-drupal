@@ -35,7 +35,7 @@
           <h3><em>David Strauss</em></h3>
         </section>
         <section data-background="images/backgrounds/16968083219_34589346e4_o.jpg">
-          <div class="about-me">
+          <div class="about-me" style="background-color: #fff; padding: 0 1em 0 1em;">
           <h2>Peter Wolanin</h2>
             <h6>BioRAFT Engineering & Drupal Security Teams</h6>
             <h2>pwolanin</h2>
@@ -66,7 +66,7 @@
             <ul>
             <li>Applicable only to sites with no QA process?</li>
             <li>Core only or contrib too?</li>
-            <li>Taking all updates?</li>
+            <li>Taking all updates or only security?</li>
             <li>Handle multiple web heads or only single?</li>
             <li>Stricter BC requirements for contrib (and core)?</li>
             </ul>
@@ -75,17 +75,18 @@
           <h2>Insecure approaches</h2>
             <ul>
             <li>WordPress-style
-            <ul>
-            <li>Does not perform any digital signature verification</li>
-            <li>Webserver overwrites PHP files</li>
-            </ul>
+              <ul>
+              <li>Webserver overwrites PHP files</li>
+              <li>Single endpoint for updates: api.wordpress.org</li>
+              <li>Does not perform any digital signature verification</li>
+              <li>Any compromise of the endpoint could compromise all sites auto-updating</li>
+              <li><a href="https://www.wordfence.com/blog/2016/11/hacking-27-web-via-wordpress-auto-update/">https://www.wordfence.com/blog/2016/11/hacking-27-web-via-wordpress-auto-update/</a></li>
+              </ul>
             </li>
-            <li></li>
-            <li></li>
             </ul>
         </section>
         <section>
-          <h2>Drupal.org infrastructure requirements</h2>
+          <h2>Infrastructure requirements</h2>
             <p>Some of these services are already under consideration and would help facilitate automatic updates by core or via scripting</p>
             <ul>
             <li>A composer UI?</li>
@@ -135,7 +136,7 @@
             <ul>
             <li>Heavy d.o infrastructure requirements</li>
             <li>MIght/would have to package all modules/themes/etc</li>
-            <li>Might not allow for any patches to code (why?)</li>
+            <li>Might not allow for any patches to code (can break the build)</li>
             </ul>
           </li>
           </ul>
