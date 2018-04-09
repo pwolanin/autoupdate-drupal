@@ -109,18 +109,12 @@
           </ul>
         </section>
         <section>
-          <h2>Option: Composer-update</h2>
-          <ul>
-          <li>Suitable only for sites built with composer</li>
-          <li>Hard to manage multiple web heads (or even one) without downtime</li>
-          </ul>
-        </section>
-        <section>
           <h2>Option: Other user accounts updates core</h2>
           <p>This option has been available for a long time for people with scripting skipps, but seems little used</p>
           <ul>
           <li>Needs a cli tool that can update core or modules</li>
           <li>Requires some kind of process to build the new codebase an move it into place</li>
+          <li>Hard to manage multiple web heads (or even one) without downtime</li>
           <li>Requires composer at least to download dependencies</li>
           <li>Otherwise, suitable for sites with only core and custom modules?</li>
           </ul>
@@ -203,16 +197,24 @@
             </ul>
         </section>
         <section>
-          <h2>Possible Implications</h2>
+          <h2>Possible Implications ...</h2>
             <ul>
             <li>Requires a writeable code directory - preferably outside the docroot</li>
             <li>Drupal core and all code needs to be together in vendor/</li>
             <li>Have a "bootloader" to pick the correct codebase (like ostree, ChromeOS, and Cisco firmware)</li>
             <li>Needs to have a way to get a secure manifest</li>
+            <li>Core needs to have one or more public keys to base trust on</li>
             <li>An incremental download and assembly of new codebase on cron</li>
+            </ul>
+        </section>
+        <section>
+          <h2>Possible Implications con't</h2>
+            <ul>
+            <li>Add to core some support for downloading based on composer.lock</li>
             <li>Drupal install via autoupdate to insure future updates work</li>
             <li>Disallow git repos and patches in composer.json</li>
-            <li>Support a build step to generate an immutable build artifact to deploy</li>
+             <li>Add to core a way for web heads to register</li>
+             <li>Support a build step to generate an immutable build artifact to deploy</li>
             </ul>
         </section>
         <section>
