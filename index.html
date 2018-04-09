@@ -78,7 +78,16 @@
                 <li>The most vulnerable / causual users can be accomodated with autoupdates</li>
               </ul>
         </section>
-          <section>
+        <section>
+          <h2>Pick 2 or 3</h2>
+          <ul>
+          <li>Security (integrity and availability)</li>
+          <li>Ease of use (reliability)</li>
+          <li>Compatability (dependencies on libraries or PHP version)</li>
+          <li>Proudly Invented Elsewhere</li>
+          </ul>
+        </section>
+        <section>
           <h2>Insecure approaches</h2>
             <ul>
             <li>WordPress-style
@@ -123,21 +132,11 @@
           <h2>Code as cache?</h2>
           <p>Are we thinking about the problem wrong? We have a protected mechanism for writing PHP cache files for Twig - if that's secure enough can we use it for everything?</p>
           <ul>
-          <li>An entry point for web requests</li>
-          <li>An auto-update subsystem</li>
-          <li>Most site code is a validated/signed/protected cache (e.g. PHAR)</li>
-          <li>Amortized updates would improve compatibility</li>
+          <li>Have an entry point for web requests</li>
+          <li>Have an auto-update subsystem</li>
+          <li>Most site code is a validated/signed/protected cache (e.g. PHAR or mtime-protected)</li>
           <li>Take inspiration from ostree, ChromeOS, and Cisco firmware updates to support atomic, distributed switching and rollback.</li>
-          <li>Possibility of using an immutable &quot;cache&quot; for more sophisticated or secure deployments. Allow pinning the vendor directory to such a build.</li>
-          </ul>
-        </section>
-        <section>
-          <h2>Pick 2 or 3</h2>
-          <ul>
-          <li>Security (integrity and availability)</li>
-          <li>Ease of use (reliability)</li>
-          <li>Compatability (dependencies on libraries or PHP version)</li>
-          <li>Proudly Invented Elsewhere</li>
+          <li>An immutable &quot;cache&quot; for more sophisticated or secure deployments. Allow pinning the vendor directory.</li>
           </ul>
         </section>
         <section>
@@ -205,6 +204,7 @@
             <li>Needs to have a way to get a secure manifest</li>
             <li>Core needs to have one or more public keys to base trust on</li>
             <li>An incremental download and assembly of new codebase on cron</li>
+            <li>Amortized updates would improve compatibility</li>
             </ul>
         </section>
         <section>
