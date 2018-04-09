@@ -226,39 +226,6 @@
             </ul>
         </section>
         <section>
-Requires a writeable directory - preferably outside the docroot.
-Fall back to using files directory like Twig cache.
-
-       immutable code cache via build step
-       Bootloader
-
-multi-web-head code as cache
-lock file in database?
-check in from web heads? Register last request served.
-
-        draw the line at git repos and patches
-        distribute root public key
-        drupal bootloader
-
-        composer incremental install
-
-
-
-At the risk of stealing our own thunder, here are some things Peter and I agree on:
-Because contrib modules may have changing Composer dependencies, integrating support for those is key to any comprehensive solution.
-The Composer dependencies themselves may need security updates.
-Simply overwriting files in-place is undesirable, particularly if core is doing it to itself. We both prefer a more atomic method of switching to an updated code base.
-It's desirable to support multi-head setups. The existing methods have no path to doing so, but some of the models we're considering do.
-        <h2>Infrastructure for Dependency Resolution</h2>
-            <p>Some of these services are already under consideration and would help facilitate automatic updates by core or via scripting</p>
-            <ul>
-            <li>A secure key infrastructure and release signing or composer.lock signing</li>
-            <li>A composer UI?</li>
-            <li>A service to generate a composer.lock for site or a given composer.json</li>
-            <li>Re-generating lock files when then are updates (or only security updates?)</li>
-            </ul>
-        </section>
-        <section>
           <h2>Discuss!</h2>
           <ul>
           <li>Is there a compelling use case?</li>
