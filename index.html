@@ -107,7 +107,7 @@
             <ul>
             <li>In place update prevents multi headed configs</li>
             <li>Requires PHP 7.2+</li>
-            <li>Their update system while maybe secure has a lot of marketing cruft and seems very built around their product and is not componentized or broken apart into a separate project. </li>
+            <li>Their update system (while maybe secure) has a lot of marketing cruft and seems very built around their product and is not componentized or broken apart into a separate project.</li>
             <li>Seems to go for perfect and not realistic.</li>
             </ul></li>
           </ul>
@@ -117,8 +117,11 @@
           <p>Are we thinking about the problem wrong? We have a protected mechanism for writing PHP cache files for Twig - if that's secure enough can we use it for everything?</p>
           <ul>
           <li>An entry point for web requests</li>
-          <li>An auto-update subsystem<li>
-          <li>Most site code is a validated/signed/protected cache (e.g. phar)</li>
+          <li>An auto-update subsystem</li>
+          <li>Most site code is a validated/signed/protected cache (e.g. PHAR)</li>
+          <li>Amortized updates would improve compatibility</li>
+          <li>Take inspiration from ostree, ChromeOS, and Cisco firmware updates to support atomic, distributed switching and rollback.</li>
+          <li>Possibility of using an immutable &quot;cache&quot; for more sophisticated or secure deployments. Allow pinning the vendor directory to such a build.</li>
           </ul>
         </section>
         <section>
@@ -174,7 +177,7 @@
           </ul>
         </section>
         <section>
-          <h2>Option: Other user accounts updates core</h2>
+          <h2>Option: Other user account updates core</h2>
           <ul>
           <li>More difficult since drush stopped supporintg upc command</li>
           <li>Requires some kind of process to build the new codebase an move it into place</li>
