@@ -71,6 +71,13 @@
             <li>Stricter BC requirements for contrib (and core)?</li>
             </ul>
           </section>
+        <section>
+             <h2>Goals</h2>
+             <ul>
+                <li>On by default</li>
+                <li>The most vulnerable / causual users can be accomodated with autoupdates</li>
+              </ul>
+        </section>
           <section>
           <h2>Insecure approaches</h2>
             <ul>
@@ -86,17 +93,6 @@
             </ul>
         </section>
         <section>
-          <h2>Infrastructure requirements</h2>
-            <p>Some of these services are already under consideration and would help facilitate automatic updates by core or via scripting</p>
-            <ul>
-            <li>A secure key infrastructure and release signing</li>
-            <li>A composer UI?</li>
-            <li>A way to save one or more composer.json files associated with my drupal.org account</li>
-            <li>Generating a composer.lock for site or a given composer.json</li>
-            <li>Re-generating lock files when then are updates (or only security updates?)</li>
-            </ul>
-          </section>
-        <section>
           <h2>Option: Airship’s Auto-Update Framework</h2>
           <ul>
           <li>Pros
@@ -111,7 +107,24 @@
             <li>Seems to go for perfect and not realistic.</li>
             </ul></li>
           </ul>
-          </section>
+        </section>
+        <section>
+          <h2>Option: Composer-update</h2>
+          <ul>
+          <li>Suitable only for sites built with composer</li>
+          <li>Hard to manage multiple web heads (or even one) without downtime</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Option: Other user accounts updates core</h2>
+          <p>This option has been available for a long time for people with scripting skipps, but seems little used</p>
+          <ul>
+          <li>Needs a cli tool that can update core or modules</li>
+          <li>Requires some kind of process to build the new codebase an move it into place</li>
+          <li>Requires composer at least to download dependencies</li>
+          <li>Otherwise, suitable for sites with only core and custom modules?</li>
+          </ul>
+        </section>
         <section>
           <h2>Code as cache?</h2>
           <p>Are we thinking about the problem wrong? We have a protected mechanism for writing PHP cache files for Twig - if that's secure enough can we use it for everything?</p>
@@ -122,6 +135,15 @@
           <li>Amortized updates would improve compatibility</li>
           <li>Take inspiration from ostree, ChromeOS, and Cisco firmware updates to support atomic, distributed switching and rollback.</li>
           <li>Possibility of using an immutable &quot;cache&quot; for more sophisticated or secure deployments. Allow pinning the vendor directory to such a build.</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Pick 2 or 3</h2>
+          <ul>
+          <li>Security (integrity and availability)</li>
+          <li>Ease of use (reliability)</li>
+          <li>Compatability (dependencies on libraries or PHP version)</li>
+          <li>Proudly Invented Elsewhere</li>
           </ul>
         </section>
         <section>
@@ -139,19 +161,19 @@
           <li>Cons
             <ul>
             <li>Heavy d.o infrastructure requirements</li>
-            <li>MIght/would have to package all modules/themes/etc</li>
+            <li>Might/would have to package all modules/themes/etc</li>
             <li>Might not allow for any patches to code (can break the build)</li>
+            <li>Hard to download in one request</li>
             </ul>
           </li>
           </ul>
-
         </section>
         <section>
           <h2>Option: Modular PHAR Distribution</h2>
           <ul>
           <li>One or more PHAR files for core</li>
           <li>One PHAR for each module</li>
-          <li>Probably decomposed dependencies (one PHAR for each unique dependency)</li>
+          <li>Decomposed dependencies (one PHAR per unique dependency)?</li>
           <li>Pros
             <ul>
             <li>CDN catchability and mirror support</li>
@@ -162,42 +184,91 @@
             <ul>
             <li>No direct support for decomposing Composer dependencies into PHAR files</li>
             <li>Harder than monolithic phar to support patches (makes them uncachable)</li>
+            <li>Need to create our own way to manage phar files</li>
+            <li>Lose developer transparency</li>
+            <li>Lose compatibility with composer</li>
             </ul>
           </li>
           </ul>
         </section>
         <section>
-          <h2>Consideration: Dependency Resolution</h2>
+          <h2>Recomendations</h2>
+            <ul>
+            <li>Because contrib modules may have changing Composer dependencies, full support for composer is key to any comprehensive solution</li>
+            <li>The Composer dependencies themselves may need security updates</li>
+            <li>Updates need to happen without human intereaction</li>
+            <li>Updates neeed to be highly reliably and not resource intensive</li>
+            <li>Overwriting files in-place is undesirable: needs an atomic method of switching to an updated code base</li>
+            <li>Support support multi-head setups (existing methods have no path to doing so)</li>
+            </ul>
         </section>
         <section>
-          <h2>Option: Composer-style File Layout</h2>
-          <ul>
-          <li>Suitable only for sites built with composer</li>
-          <li>Possibly hard to manage multiple web heads without downtime</li>
-          </ul>
+          <h2>Possible Implications</h2>
+            <ul>
+            <li>Requires a writeable code directory - preferably outside the docroot</li>
+            <li>Drupal core and all code needs to be together in vendor/</li>
+            <li>Have a "bootloader" to pick the correct codebase (like ostree, ChromeOS, and Cisco firmware)</li>
+            <li>Needs to have a way to get a secure manifest</li>
+            <li>An incremental download and assembly of new codebase on cron</li>
+            <li>Drupal install via autoupdate to insure future updates work</li>
+            <li>Disallow git repos and patches in composer.json</li>
+            <li>Support a build step to generate an immutable build artifact to deploy</li>
+            </ul>
         </section>
         <section>
-          <h2>Option: Other user account updates core</h2>
-          <ul>
-          <li>More difficult since drush stopped supporintg upc command</li>
-          <li>Requires some kind of process to build the new codebase an move it into place</li>
-          <li>Requires composer at least to download dependencies</li>
-          <li>Otherwise, suitable for sites with only core and custom modules?</li>
-          </ul>
+          <h2>Infrastructure for Dependency Resolution</h2>
+            <p>Some of these services are already under consideration and would help facilitate automatic updates by core or via scripting</p>
+            <ul>
+            <li>A secure key infrastructure and release signing or composer.lock signing</li>
+            <li>A composer UI?</li>
+            <li>A service to generate a composer.lock for site or a given composer.json</li>
+            <li>Re-generating lock files when then are updates (or only security updates?)</li>
+            </ul>
         </section>
         <section>
-          <h2>Consideration: Where Builds Happen</h2>
+Requires a writeable directory - preferably outside the docroot.
+Fall back to using files directory like Twig cache.
+
+       immutable code cache via build step
+       Bootloader
+
+multi-web-head code as cache
+lock file in database?
+check in from web heads? Register last request served.
+
+        draw the line at git repos and patches
+        distribute root public key
+        drupal bootloader
+
+        composer incremental install
+
+
+
+At the risk of stealing our own thunder, here are some things Peter and I agree on:
+Because contrib modules may have changing Composer dependencies, integrating support for those is key to any comprehensive solution.
+The Composer dependencies themselves may need security updates.
+Simply overwriting files in-place is undesirable, particularly if core is doing it to itself. We both prefer a more atomic method of switching to an updated code base.
+It's desirable to support multi-head setups. The existing methods have no path to doing so, but some of the models we're considering do.
+        <h2>Infrastructure for Dependency Resolution</h2>
+            <p>Some of these services are already under consideration and would help facilitate automatic updates by core or via scripting</p>
+            <ul>
+            <li>A secure key infrastructure and release signing or composer.lock signing</li>
+            <li>A composer UI?</li>
+            <li>A service to generate a composer.lock for site or a given composer.json</li>
+            <li>Re-generating lock files when then are updates (or only security updates?)</li>
+            </ul>
         </section>
         <section>
           <h2>Discuss!</h2>
           <ul>
           <li>Is there a compelling use case?</li>
+          <li>Do you agree with our recomendations?</li>
           <li>Do we have the resources to develop and maintain new infra?</li>
           <li>Do we have resources and expertise to substantially rework the code layout?</li>
           <li>Drupal 9 or 10?</li>
           </ul>
         </section>
-      <section data-background="images/backgrounds/Nashville.png">
+        <section data-background="images/backgrounds/Nashville.png">
           <h3>What did you think?</h3>
           <h3>Locate this session at the DrupalCon Nashville website:</h3>
           <p><a href="https://events.drupal.org/node/21010">https://events.drupal.org/node/21010</a></p>
@@ -205,6 +276,7 @@
           <p><a href="https://www.surveymonkey.com/r/DrupalConNashville">https://www.surveymonkey.com/r/DrupalConNashville</a></p>
         </section>
         </div>
+
     </div>
 
     <script src="lib/js/head.min.js"></script>
