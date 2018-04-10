@@ -62,6 +62,14 @@
           </ul>
         </section>
         <section>
+          <h2>Critical Unanswered Questions</h2>
+            <ul>
+            <li>What problem are we actually trying to solve?</li>
+            <li>Which users or percent of sites would be helped?</li>
+            <li>What is the ROI for the Drupal project / community?</li>
+            </ul>
+          </section>
+        <section>
           <h2>Is there a Use Case?</h2>
             <ul>
             <li>Applicable only to sites with no QA process?</li>
@@ -72,7 +80,7 @@
             </ul>
           </section>
         <section>
-             <h2>Goals</h2>
+             <h2>Is the goal the long tail?</h2>
              <ul>
                 <li>On by default</li>
                 <li>The most vulnerable / causual users can be accomodated with autoupdates</li>
@@ -199,17 +207,18 @@
           <h2>Possible Implications ...</h2>
             <ul>
             <li>Requires a writeable code directory - preferably outside the docroot</li>
+            <li>Have a way to expose corresponding assets (css/js/images)</li>
             <li>Drupal core and all code needs to be together in vendor/</li>
             <li>Have a "bootloader" to pick the correct codebase (like ostree, ChromeOS, and Cisco firmware)</li>
             <li>Needs to have a way to get a secure manifest</li>
             <li>Core needs to have one or more public keys to base trust on</li>
-            <li>An incremental download and assembly of new codebase on cron</li>
-            <li>Amortized updates would improve compatibility</li>
             </ul>
         </section>
         <section>
           <h2>Possible Implications con't</h2>
             <ul>
+            <li>An incremental download and assembly of new codebase on cron</li>
+            <li>Amortized updates would improve compatibility</li>
             <li>Add to core some support for downloading based on composer.lock</li>
             <li>Drupal install via autoupdate to insure future updates work</li>
             <li>Disallow git repos and patches in composer.json</li>
@@ -230,7 +239,7 @@
         <section>
           <h2>Discuss!</h2>
           <ul>
-          <li>Is there a compelling use case?</li>
+          <li>Is there a clear problem and compelling use case?</li>
           <li>Do you agree with our recomendations?</li>
           <li>Do we have the resources to develop and maintain new infra?</li>
           <li>Do we have resources and expertise to substantially rework the code layout?</li>
