@@ -76,10 +76,24 @@
         </ul>
       </section>
       <section>
-        <h2>Is the goal the long tail?</h2>
+        <h2>Personas</h2>
         <ul>
-          <li>On by default</li>
-          <li>The most vulnerable / causual users can be accomodated with autoupdates</li>
+          <li><strong>Deploy and Ignore:</strong> Once the site has the functionality needed, there's little maintenance or updating. Doesn't subscribe to
+          PSAs.</li>
+          <li><strong>Diligent but with Simple Needs:</strong> Typically applies updates within a week of release, possibly longer for non-security updates.
+          Follows up on PSAs by directly updating the live site.</li>
+          <li><strong>The Sophisticate:</strong> Needs to apply at least one build step (for CSS, Composer, etc.). Runs QA in a pre-production environment. May
+          deploy to a multi-head cluster.</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Premises</h2>
+        <ul>
+          <li>Few sites run just Drupal core.</li>
+          <li>Contributed modules have changing Composer dependencies.</li>
+          <li>Composer dependencies can, themselves, require security updates.</li>
+          <li>Fundamentally changing the deployment requirements would be bad (at a minimum, push the work to Drupal 9).</li>
+          <li>The most straightforward installation of Drupal should support automatic updating.</li>
         </ul>
       </section>
       <section>
@@ -118,7 +132,7 @@
           </li>
           <li>Cons
             <ul>
-              <li>In place update prevents multi headed configs</li>
+              <li>In-place update prevents multi headed configs</li>
               <li>Requires PHP 7.2+</li>
               <li>Their update system (while maybe secure) has a lot of marketing cruft and seems very built around their product and is not componentized or
               broken apart into a separate project.</li>
@@ -128,10 +142,10 @@
         </ul>
       </section>
       <section>
-        <h2>Option: Other user accounts updates core</h2>
-        <p>This option has been available for a long time for people with scripting skipps, but seems little used</p>
+        <h2>Option: Other user account updates core</h2>
+        <p>This option has been available for a long time for people with scripting skipps but seems little used.</p>
         <ul>
-          <li>Needs a cli tool that can update core or modules</li>
+          <li>Needs a CLI tool that can update core or modules</li>
           <li>Requires some kind of process to build the new codebase an move it into place</li>
           <li>Hard to manage multiple web heads (or even one) without downtime</li>
           <li>Requires composer at least to download dependencies</li>
@@ -200,14 +214,14 @@
         <ul>
           <li>Because contrib modules may have changing Composer dependencies, full support for composer is key to any comprehensive solution</li>
           <li>The Composer dependencies themselves may need security updates</li>
-          <li>Updates need to happen without human intereaction</li>
-          <li>Updates neeed to be highly reliably and not resource intensive</li>
+          <li>Updates need to happen without human interaction</li>
+          <li>Updates neeed to be highly reliable and not resource-intensive</li>
           <li>Overwriting files in-place is undesirable: needs an atomic method of switching to an updated code base</li>
           <li>Support support multi-head setups (existing methods have no path to doing so)</li>
         </ul>
       </section>
       <section>
-        <h2>Possible Implications ...</h2>
+        <h2>Possible Implications...</h2>
         <ul>
           <li>Requires a writeable code directory - preferably outside the docroot</li>
           <li>Have a way to expose corresponding assets (css/js/images)</li>
@@ -230,13 +244,35 @@
         </ul>
       </section>
       <section>
+        <h2>One Way to Do It</h2>
+        <ul>
+          <li><strong>index.php:</strong> Bootloader. Initializes autoload path.</li>
+          <li><strong>install.php:</strong> NetInstall style. Performs one "update" as part of installation. Never used afterward.</li>
+          <ul>
+            <li>files/</li>
+            <ul>
+              <li>vendor-kjfksld/</li>
+              <ul>
+                <li><em>Composer-style layout of core and contrib.</em></li>
+              </ul>
+              <li>vendor-sdfiuj84/</li>
+              <ul>
+                <li><em>Composer-style layout of core and contrib.</em></li>
+              </ul>
+            </ul>
+          </ul>
+          <li><em>Vendor path would also be configurable.</em></li>
+        </ul>
+      </section>
+      <section>
         <h2>Infrastructure for Dependency Resolution</h2>
         <p>Some of these services are already under consideration and would help facilitate automatic updates by core or via scripting</p>
         <ul>
           <li>A secure key infrastructure and release signing or composer.lock signing</li>
-          <li>A composer UI?</li>
+          <li>A Composer UI?</li>
           <li>A service to generate a composer.lock for site or a given composer.json</li>
           <li>Re-generating lock files when then are updates (or only security updates?)</li>
+          <li>We only need dynamic dependency resolution for contrib updates. Core could be prebaked.</li>
         </ul>
       </section>
       <section>
@@ -246,7 +282,7 @@
           <li>Do you agree with our recomendations?</li>
           <li>Do we have the resources to develop and maintain new infra?</li>
           <li>Do we have resources and expertise to substantially rework the code layout?</li>
-          <li>Drupal 9 or 10?</li>
+          <li>Drupal 8, 9, or 10?</li>
         </ul>
       </section>
       <section data-background="images/backgrounds/Nashville.png">
@@ -261,6 +297,7 @@
   <script src="lib/js/head.min.js"></script> 
   <script src="js/reveal.js"></script> 
   <script>
+
 
 
 
