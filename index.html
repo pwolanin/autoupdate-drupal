@@ -1,18 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="generator" content=
-  "HTML Tidy for HTML5 for Linux version 5.4.0">
+  <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.4.0">
   <meta charset="utf-8">
-  <meta name="viewport" content=
-  "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Drupal Core Auto-Update Architecture</title>
   <link rel="stylesheet" href="css/reveal.css">
-  <link rel="stylesheet" href="css/theme/simple.css">
-  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="css/theme/simple.css"><!-- Theme used for syntax highlighting of code -->
   <link rel="stylesheet" href="lib/css/zenburn.css">
-  <link rel="stylesheet" href="css/autoupdate-drupal.css">
-  <!-- Printing and PDF exports -->
+  <link rel="stylesheet" href="css/autoupdate-drupal.css"><!-- Printing and PDF exports -->
 
   <script>
       var link = document.createElement( 'link' );
@@ -25,49 +21,39 @@
 <body>
   <div class="reveal">
     <div class="slides">
-      <section data-background=
-      "images/backgrounds/Nashville-opener.png"></section>
+      <section data-background="images/backgrounds/Nashville-opener.png"></section>
       <section data-background="images/backgrounds/Nashville.png">
         <h2>Drupal Core Auto-Update Architecture</h2>
         <h3><em>Peter Wolanin</em></h3>
         <h3><em>David Strauss</em></h3>
       </section>
-      <section data-background=
-      "images/backgrounds/16968083219_34589346e4_o.jpg">
-        <div class="about-me" style=
-        "background-color: #fff; padding: 0 1em 0 1em;">
+      <section data-background="images/backgrounds/16968083219_34589346e4_o.jpg">
+        <div class="about-me" style="background-color: #fff; padding: 0 1em 0 1em;">
           <h2>Peter Wolanin</h2>
           <h6>BioRAFT Engineering & Drupal Security Teams</h6>
           <h2>pwolanin</h2>
-          <p class="photo-credit">Photo by <a href=
-          "https://www.flickr.com/photos/amazeelabs/16968083219/in/set-72157651561042300">
-          amazeelabs</a>, <a href=
+          <p class="photo-credit">Photo by <a href="https://www.flickr.com/photos/amazeelabs/16968083219/in/set-72157651561042300">amazeelabs</a>, <a href=
           "https://creativecommons.org/licenses/by-nc-sa/2.0/">by-nc-sa</a></p>
         </div>
       </section>
-      <section data-background=
-      "images/backgrounds/36703677943_cfdc0aa59e_k.jpg">
+      <section data-background="images/backgrounds/36703677943_cfdc0aa59e_k.jpg">
         <div class="about-me">
           <h2>David Strauss</h2>
           <h6>Pantheon CTO / Co-Founder & Drupal Security Team</h6>
           <h2>davidstrauss</h2>
-          <p class="photo-credit">Photo by <a href=
-          "https://www.flickr.com/photos/73490109@N02/36703677943/in/pool-drupalconvienna2017/">
-          Dominik Kiss</a>, <a href=
-          "https://creativecommons.org/licenses/by-nc/2.0/">by-nc</a></p>
+          <p class="photo-credit">Photo by <a href="https://www.flickr.com/photos/73490109@N02/36703677943/in/pool-drupalconvienna2017/">Dominik Kiss</a>,
+          <a href="https://creativecommons.org/licenses/by-nc/2.0/">by-nc</a></p>
         </div>
       </section>
       <section>
         <h2>Background</h2>
         <ul>
           <li>
-            <a href="https://theupdateframework.github.io/">The
-            Update Framework (TUF)</a>
+            <a href="https://theupdateframework.github.io/">The Update Framework (TUF)</a>
           </li>
           <li>
-            <a href=
-            "https://paragonie.com/blog/2016/10/guide-automatic-security-updates-for-php-developers#why-automatic-updates">
-            Paragon's Guide to Automatic Security Updates</a>
+            <a href="https://paragonie.com/blog/2016/10/guide-automatic-security-updates-for-php-developers#why-automatic-updates">Paragon's Guide to Automatic
+            Security Updates</a>
           </li>
         </ul>
       </section>
@@ -76,8 +62,7 @@
         <ul>
           <li>What problem are we actually trying to solve?</li>
           <li>Which users or percent of sites would be helped?</li>
-          <li>What is the ROI for the Drupal project /
-          community?</li>
+          <li>What is the ROI for the Drupal project / community?</li>
         </ul>
       </section>
       <section>
@@ -94,8 +79,7 @@
         <h2>Is the goal the long tail?</h2>
         <ul>
           <li>On by default</li>
-          <li>The most vulnerable / causual users can be
-          accomodated with autoupdates</li>
+          <li>The most vulnerable / causual users can be accomodated with autoupdates</li>
         </ul>
       </section>
       <section>
@@ -103,8 +87,7 @@
         <ul>
           <li>Security (integrity and availability)</li>
           <li>Ease of use (reliability)</li>
-          <li>Compatibility (dependencies on libraries or PHP
-          version)</li>
+          <li>Compatibility (dependencies on libraries or PHP version)</li>
           <li>Proudly Invented Elsewhere (PIE)</li>
         </ul>
       </section>
@@ -114,16 +97,12 @@
           <li>WordPress-style
             <ul>
               <li>Webserver overwrites PHP files</li>
-              <li>Single endpoint for updates:
-              api.wordpress.org</li>
-              <li>Does not perform any digital signature
-              verification</li>
-              <li>Any compromise of the endpoint could compromise
-              all sites auto-updating</li>
+              <li>Single endpoint for updates: api.wordpress.org</li>
+              <li>Does not perform any digital signature verification</li>
+              <li>Any compromise of the endpoint could compromise all sites auto-updating</li>
               <li>
                 <a href=
-                "https://www.wordfence.com/blog/2016/11/hacking-27-web-via-wordpress-auto-update/">
-                https://www.wordfence.com/blog/2016/11/hacking-27-web-via-wordpress-auto-update/</a>
+                "https://www.wordfence.com/blog/2016/11/hacking-27-web-via-wordpress-auto-update/">https://www.wordfence.com/blog/2016/11/hacking-27-web-via-wordpress-auto-update/</a>
               </li>
             </ul>
           </li>
@@ -139,13 +118,10 @@
           </li>
           <li>Cons
             <ul>
-              <li>In place update prevents multi headed
-              configs</li>
+              <li>In place update prevents multi headed configs</li>
               <li>Requires PHP 7.2+</li>
-              <li>Their update system (while maybe secure) has a
-              lot of marketing cruft and seems very built around
-              their product and is not componentized or broken
-              apart into a separate project.</li>
+              <li>Their update system (while maybe secure) has a lot of marketing cruft and seems very built around their product and is not componentized or
+              broken apart into a separate project.</li>
               <li>Seems to go for perfect and not realistic.</li>
             </ul>
           </li>
@@ -153,45 +129,33 @@
       </section>
       <section>
         <h2>Option: Other user accounts updates core</h2>
-        <p>This option has been available for a long time for
-        people with scripting skipps, but seems little used</p>
+        <p>This option has been available for a long time for people with scripting skipps, but seems little used</p>
         <ul>
           <li>Needs a cli tool that can update core or modules</li>
-          <li>Requires some kind of process to build the new
-          codebase an move it into place</li>
-          <li>Hard to manage multiple web heads (or even one)
-          without downtime</li>
-          <li>Requires composer at least to download
-          dependencies</li>
-          <li>Otherwise, suitable for sites with only core and
-          custom modules?</li>
+          <li>Requires some kind of process to build the new codebase an move it into place</li>
+          <li>Hard to manage multiple web heads (or even one) without downtime</li>
+          <li>Requires composer at least to download dependencies</li>
+          <li>Otherwise, suitable for sites with only core and custom modules?</li>
         </ul>
       </section>
       <section>
         <h2>Code as cache?</h2>
-        <p>Are we thinking about the problem wrong? We have a
-        protected mechanism for writing PHP cache files for Twig -
-        if that's secure enough can we use it for everything?</p>
+        <p>Are we thinking about the problem wrong? We have a protected mechanism for writing PHP cache files for Twig - if that's secure enough can we use it
+        for everything?</p>
         <ul>
           <li>Have an entry point for web requests</li>
           <li>Have an auto-update subsystem</li>
-          <li>Most site code is a validated/signed/protected cache
-          (e.g. PHAR or mtime-protected)</li>
-          <li>Take inspiration from ostree, ChromeOS, and Cisco
-          firmware updates to support atomic, distributed switching
-          and rollback.</li>
-          <li>An immutable "cache" for more sophisticated or secure
-          deployments. Allow pinning the vendor directory.</li>
+          <li>Most site code is a validated/signed/protected cache (e.g. PHAR or mtime-protected)</li>
+          <li>Take inspiration from ostree, ChromeOS, and Cisco firmware updates to support atomic, distributed switching and rollback.</li>
+          <li>An immutable "cache" for more sophisticated or secure deployments. Allow pinning the vendor directory.</li>
         </ul>
       </section>
       <section>
         <h2>Option: Monolithic PHAR Distribution</h2>
         <ul>
           <li>One PHAR for the entire site deployment</li>
-          <li>Built on Drupal.org servers (or affiliated
-          infrastructure)</li>
-          <li>Minimizes complexity of the web server
-          infrastructure</li>
+          <li>Built on Drupal.org servers (or affiliated infrastructure)</li>
+          <li>Minimizes complexity of the web server infrastructure</li>
           <li>Pros
             <ul>
               <li>Simplicity</li>
@@ -201,10 +165,8 @@
           <li>Cons
             <ul>
               <li>Heavy d.o infrastructure requirements</li>
-              <li>Might/would have to package all
-              modules/themes/etc</li>
-              <li>Might not allow for any patches to code (can
-              break the build)</li>
+              <li>Might/would have to package all modules/themes/etc</li>
+              <li>Might not allow for any patches to code (can break the build)</li>
               <li>Hard to download in one request</li>
             </ul>
           </li>
@@ -215,23 +177,18 @@
         <ul>
           <li>One or more PHAR files for core</li>
           <li>One PHAR for each module</li>
-          <li>Decomposed dependencies (one PHAR per unique
-          dependency)?</li>
+          <li>Decomposed dependencies (one PHAR per unique dependency)?</li>
           <li>Pros
             <ul>
               <li>CDN catchability and mirror support</li>
-              <li>Lower bandwidth requirements than a massive
-              file</li>
+              <li>Lower bandwidth requirements than a massive file</li>
             </ul>
           </li>
           <li>Cons
             <ul>
-              <li>No direct support for decomposing Composer
-              dependencies into PHAR files</li>
-              <li>Harder than monolithic phar to support patches
-              (makes them uncachable)</li>
-              <li>Need to create our own way to manage phar
-              files</li>
+              <li>No direct support for decomposing Composer dependencies into PHAR files</li>
+              <li>Harder than monolithic phar to support patches (makes them uncachable)</li>
+              <li>Need to create our own way to manage phar files</li>
               <li>Lose developer transparency</li>
               <li>Lose compatibility with composer</li>
             </ul>
@@ -241,96 +198,72 @@
       <section>
         <h2>Recomendations</h2>
         <ul>
-          <li>Because contrib modules may have changing Composer
-          dependencies, full support for composer is key to any
-          comprehensive solution</li>
-          <li>The Composer dependencies themselves may need
-          security updates</li>
-          <li>Updates need to happen without human
-          intereaction</li>
-          <li>Updates neeed to be highly reliably and not resource
-          intensive</li>
-          <li>Overwriting files in-place is undesirable: needs an
-          atomic method of switching to an updated code base</li>
-          <li>Support support multi-head setups (existing methods
-          have no path to doing so)</li>
+          <li>Because contrib modules may have changing Composer dependencies, full support for composer is key to any comprehensive solution</li>
+          <li>The Composer dependencies themselves may need security updates</li>
+          <li>Updates need to happen without human intereaction</li>
+          <li>Updates neeed to be highly reliably and not resource intensive</li>
+          <li>Overwriting files in-place is undesirable: needs an atomic method of switching to an updated code base</li>
+          <li>Support support multi-head setups (existing methods have no path to doing so)</li>
         </ul>
       </section>
       <section>
         <h2>Possible Implications ...</h2>
         <ul>
-          <li>Requires a writeable code directory - preferably
-          outside the docroot</li>
-          <li>Have a way to expose corresponding assets
-          (css/js/images)</li>
-          <li>Drupal core and all code needs to be together in
-          vendor/</li>
-          <li>Have a "bootloader" to pick the correct codebase
-          (like ostree, ChromeOS, and Cisco firmware)</li>
+          <li>Requires a writeable code directory - preferably outside the docroot</li>
+          <li>Have a way to expose corresponding assets (css/js/images)</li>
+          <li>Drupal core and all code needs to be together in vendor/</li>
+          <li>Have a "bootloader" to pick the correct codebase (like ostree, ChromeOS, and Cisco firmware)</li>
           <li>Needs to have a way to get a secure manifest</li>
-          <li>Core needs to have one or more public keys to base
-          trust on</li>
+          <li>Core needs to have one or more public keys to base trust on</li>
         </ul>
       </section>
       <section>
         <h2>Possible Implications con't</h2>
         <ul>
-          <li>An incremental download and assembly of new codebase
-          on cron</li>
+          <li>An incremental download and assembly of new codebase on cron</li>
           <li>Amortized updates would improve compatibility</li>
-          <li>Add to core some support for downloading based on
-          composer.lock</li>
-          <li>Drupal install via autoupdate to insure future
-          updates work</li>
+          <li>Add to core some support for downloading based on composer.lock</li>
+          <li>Drupal install via autoupdate to insure future updates work</li>
           <li>Disallow git repos and patches in composer.json</li>
           <li>Add to core a way for web heads to register</li>
-          <li>Support a build step to generate an immutable build
-          artifact to deploy</li>
+          <li>Support a build step to generate an immutable build artifact to deploy</li>
         </ul>
       </section>
       <section>
         <h2>Infrastructure for Dependency Resolution</h2>
-        <p>Some of these services are already under consideration
-        and would help facilitate automatic updates by core or via
-        scripting</p>
+        <p>Some of these services are already under consideration and would help facilitate automatic updates by core or via scripting</p>
         <ul>
-          <li>A secure key infrastructure and release signing or
-          composer.lock signing</li>
+          <li>A secure key infrastructure and release signing or composer.lock signing</li>
           <li>A composer UI?</li>
-          <li>A service to generate a composer.lock for site or a
-          given composer.json</li>
-          <li>Re-generating lock files when then are updates (or
-          only security updates?)</li>
+          <li>A service to generate a composer.lock for site or a given composer.json</li>
+          <li>Re-generating lock files when then are updates (or only security updates?)</li>
         </ul>
       </section>
       <section>
         <h2>Discuss!</h2>
         <ul>
-          <li>Is there a clear problem and compelling use
-          case?</li>
+          <li>Is there a clear problem and compelling use case?</li>
           <li>Do you agree with our recomendations?</li>
-          <li>Do we have the resources to develop and maintain new
-          infra?</li>
-          <li>Do we have resources and expertise to substantially
-          rework the code layout?</li>
+          <li>Do we have the resources to develop and maintain new infra?</li>
+          <li>Do we have resources and expertise to substantially rework the code layout?</li>
           <li>Drupal 9 or 10?</li>
         </ul>
       </section>
       <section data-background="images/backgrounds/Nashville.png">
         <h3>What did you think?</h3>
-        <h3>Locate this session at the DrupalCon Nashville
-        website:</h3>
-        <p><a href=
-        "https://events.drupal.org/node/21010">https://events.drupal.org/node/21010</a></p>
+        <h3>Locate this session at the DrupalCon Nashville website:</h3>
+        <p><a href="https://events.drupal.org/node/21010">https://events.drupal.org/node/21010</a></p>
         <h3>Take the Survey!</h3>
-        <p><a href=
-        "https://www.surveymonkey.com/r/DrupalConNashville">https://www.surveymonkey.com/r/DrupalConNashville</a></p>
+        <p><a href="https://www.surveymonkey.com/r/DrupalConNashville">https://www.surveymonkey.com/r/DrupalConNashville</a></p>
       </section>
     </div>
   </div>
   <script src="lib/js/head.min.js"></script> 
   <script src="js/reveal.js"></script> 
   <script>
+
+
+
 
       // More info about config & dependencies:
       // - https://github.com/hakimel/reveal.js#configuration
